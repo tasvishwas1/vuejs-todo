@@ -70,25 +70,20 @@ export default {
   name: 'Home',
   data() {
     return {
-      newTaskTitle: 'Hello',
+      newTaskTitle: '',
     }
   },
   methods: {
+    addTask() {
+      this.$store.commit('addTask', this.newTaskTitle)
+      this.taskTitle = '';
+    },
     doneTask(id) {
       let task = this.tasks.filter(task => task.id === id)[0]
       task.done = !task.done
     },
     deleteTask(id) {
       this.tasks = this.tasks.filter(task => task.id !== id)
-    },
-    addTask() {
-      let newTask = {
-        id: Date.now(),
-        title: this.newTaskTitle,
-        done: false
-      }
-      this.tasks.push(newTask);
-      this.newTaskTitle = '';
     },
   }
 }
